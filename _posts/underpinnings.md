@@ -1,9 +1,7 @@
 ---
 layout: distill
-title: Sample Blog Post
-description: Your blog post's abstract.
-  Please add your abstract or summary here and not in the main body of your text. 
-  Do not include math/latex or hyperlinks.
+title: The Philosophical and Statistical Underpinnings of ML Fairness
+description: In Plato's celebrated *Meno* [2], after the title character Meno asks Socrates whether virtue can be taught, he is taken on a whirlwind tour of the intellectual concepts, only to be brought by Socrates to the conclusion that virtue is (1) a gift from the gods (2) a concept that neither Meno nor Socrates really understand. Having armed myself with a generous helping of hubris and Corbett-Davies et al.'s excellent *JMLR* article "The Measure and Mismeasure of Fairness" [1], I would like to take you on a similar tour. I'll depart from the usual mid-2010s story -- the difficulty with understanding fairness in ML cannot be reduced to figuring out what your principles are and then mapping those  [3]. I'll also depart from the story by Corbett-Davies et al. -- it's not all about designing policies maximizing utility, however broadly utility is defined. Instead, I'll argue for a sort of reflective equilibrium: **ethical reasoning about any particular case needs to consider counterarguments, and, in particular, any principle that's articulated should be tested against challenging counterexamples -- a little Socrates whispering in your ear.**
 date: 2025-04-28
 future: true
 htmlwidgets: true
@@ -14,21 +12,13 @@ hidden: false
 #   - name: Anonymous
 
 authors:
-  - name: Albert Einstein
+  - name: Anonymous
     url: "https://en.wikipedia.org/wiki/Albert_Einstein"
     affiliations:
-      name: IAS, Princeton
-  - name: Boris Podolsky
-    url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
-    affiliations:
-      name: IAS, Princeton
-  - name: Nathan Rosen
-    url: "https://en.wikipedia.org/wiki/Nathan_Rosen"
-    affiliations:
-      name: IAS, Princeton
+      name: Anonymous
 
 # must be the exact same name as your blogpost
-bibliography: 2025-04-28-distill-example.bib  
+#bibliography: 2025-04-28-distill-example.bib  
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
@@ -67,387 +57,208 @@ _styles: >
   }
 ---
 
-Note: please use the table of contents as defined in the front matter rather than the traditional markdown styling.
-
-## Equations
-
-This theme supports rendering beautiful math in inline and display modes using [MathJax 3](https://www.mathjax.org/) engine.
-You just need to surround your math expression with `$$`, like `$$ E = mc^2 $$`.
-If you leave it inside a paragraph, it will produce an inline expression, just like $$ E = mc^2 $$.
-
-To use display mode, again surround your expression with `$$` and place it as a separate paragraph.
-Here is an example:
-
-$$
-\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-$$
-
-Note that MathJax 3 is [a major re-write of MathJax](https://docs.mathjax.org/en/latest/upgrading/whats-new-3.0.html) 
-that brought a significant improvement to the loading and rendering speed, which is now 
-[on par with KaTeX](http://www.intmath.com/cg5/katex-mathjax-comparison.php).
+# Getting to the bottom of the philosophical underpinning of ML Fairness literature
 
 
-## Images and Figures
-
-Its generally a better idea to avoid linking to images hosted elsewhere - links can break and you
-might face losing important information in your blog post.
-To include images in your submission in this way, you must do something like the following:
+> Socrates: You say that the capacity to get good things is virtue?
+> 
+> Meno: I do.
+> 
+> Socrates: And by good things you mean, for example, health and wealth?
+> 
+> Meno: I also mean amassing plenty of gold and silver—and winning honors and public office.
+> 
+> Socrates: So, by ‘good things’ you don’t mean other sorts of things than these?
+> 
+> Meno: No, I mean all things of this kind. 
+>
+>Socrates: Very well. According to Meno—hereditary guest friend of the Great King—virtue is getting your hands on the cash. Do you qualify this definition, Meno, with the words ‘justly’ and ‘piously’? Or is it all the same to you—virtue either way—if you make your fortune unjustly?
+> 
+> Meno: Certainly not, Socrates.
+> 
+> Socrates: You would call it viciousness, then?
+> 
+> Meno: That I would.
+> 
+> Socrates: It seems, then, that the getting of gold must go along with justice or moderation or piety or some other element of virtue. If it does not, it won’t be virtue, no matter what good things are obtained.
+> 
+> Meno: Yes. How could there be virtue if these elements were missing?
+> 
+> Socrates: Then failing to acquire gold and silver, whether for oneself or for another, if these other elements were missing from the situation, would be a case of virtue?
+> 
+> Meno: So it seems.
+> 
+> Socrates: It follows that getting hold of the goods will not be virtue any more so than failing to do so is. Apparently it’s the case that whatever is done with justice will be virtue, and whatever is done in the absence of these good qualities will be vice.
+> 
+> Plato's *Meno* translated by Belle Waring. Free pdf from the translator: <https://examinedlife.typepad.com/files/randpchapter8-1.pdf>
 
-```markdown
-{% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
-```
 
-which results in the following image:
 
-{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}
 
-To ensure that there are no namespace conflicts, you must save your asset to your unique directory
-`/assets/img/2025-04-28-[SUBMISSION NAME]` within your submission.
+# Introduction
 
-Please avoid using the direct markdown method of embedding images; they may not be properly resized.
-Some more complex ways to load images (note the different styles of the shapes/shadows):
+For many years now, the ML fairness literature displayed an awareness of the fact that there are multiple measures of fairness. It is understood that fairness is a complex concept that cannot be reduced to a single measure. Nevertheless, hidden statistical and philosophical assumptions underlie even many papers that attempt to grapple with the issue.
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/9.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/7.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
-</div>
+I will look at a few recent papers, and attempt a Socratic investigation of the assumptions underlying them. At the end, I will provide a set of problems that seem GPT-proof: I invite the readers to try them with their favourite LLM and seem the LLM get as confused as its training data.
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/8.jpg" class="img-fluid z-depth-2" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/10.jpg" class="img-fluid z-depth-2" %}
-    </div>
-</div>
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/11.jpg" class="img-fluid"  %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/12.jpg" class="img-fluid" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/2025-04-28-distill-example/7.jpg" class="img-fluid" %}
-    </div>
-</div>
+# All observational fairness measures are wrong
 
-### Interactive Figures
+Observational measures of fairness -- measures that you can get from a labelled dataset -- came to prominence in ML in the context of the [ProPublica COMPAS story](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing) in 2016.
 
-Here's how you could embed interactive figures that have been exported as HTML files.
-Note that we will be using plotly for this demo, but anything built off of HTML should work
-(**no extra javascript is allowed!**).
-All that's required is for you to export your figure into HTML format, and make sure that the file
-exists in the `assets/html/[SUBMISSION NAME]/` directory in this repository's root directory.
-To embed it into any page, simply insert the following code anywhere into your page.
+The investigation revealed that the false positive rate of the recidivism prediction COMPAS for African-American defendants was much higher than the false-positive rate for Caucasian defendants -- a larger percentage of African-American defendants who did not up being re-arrested were predicted to be re-arrested.
 
-```markdown
-{% raw %}{% include [FIGURE_NAME].html %}{% endraw %} 
-```
+### A quick primer on observation fairness measures
 
-For example, the following code can be used to generate the figure underneath it.
+Suppose we have a sensitive demographic $D$ and an outcome of interest of $X$ (in the case of COMPAS, $X$ is re-arrest), and a prediction of $X$, $Y$.  Here are the usual measures of fairness:
 
-```python
-import pandas as pd
-import plotly.express as px
+- **Demographic parity**: $P(Y=1|D=1) = P(Y=1|D=0)$. That is, the same percentage of people gets re-arrested in different demographics. This is susceuptible to the objection that it might be that the *correct* predictions of re-arrest are different in different demographics. That might be because of systemic bias, but it could also be because of a benign lurking variable. For example, the fact that African-American defendants in the COMPAS dataset are younger statistically explains some of the disparity in re-arrest rates.
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
+**False-positive parity**: $P(Y=1|D=1, X=0) = P(Y=1|D=0, X=0)$. That is, the same percentage of people who are not re-arrested are predicted to be re-arrested in different demographics. The appeal is obvious: if you won't be re-arrested, the system shouldn't predict you will, and if the system is wrong, it should be wrong in the same way for everyone.
 
-fig = px.density_mapbox(
-    df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
-    center=dict(lat=0, lon=180), zoom=0, mapbox_style="stamen-terrain")
-fig.show()
+**False-negative parity**: $P(Y=1|D=1, X=1) = P(Y=1|D=0, X=1)$. That is, the same percentage of people who are re-arrested are predicted to be re-arrested in different demographics. The argument is similar to the false-positive parity argument.
 
-fig.write_html('./assets/html/2025-04-28-distill-example/plotly_demo_1.html')
-```
+**Calibration**: $P(X=1|Y=1, D=1) = P(X=1|Y=1, D=0)$. That is, if the system predicts re-arrest, the probability of re-arrest is the same in different demographics. If the system predicts a probability of re-arrest, a calibrated system will have that probability be correct. The argument for calibration is straightforward: we just want the system to be as right as possible. The argument against it must involve saying that we want to bias the system away from being right about $X$, because $X$ itself is flawed, or that biasing the system make the system more just in another way.
 
-And then include it with the following:
+As was quickly pointed out, if the base rates are different, in general, only one measure of fairness can possibly hold at a time.
 
-```html
-{% raw %}<div class="l-page">
-  <iframe src="{{ 'assets/html/2025-04-28-distill-example/plotly_demo_1.html' | relative_url }}" frameborder='0' scrolling='no' height="600px" width="100%"></iframe>
-</div>{% endraw %}
-```
+### Causal Fairness
 
-Voila!
+The idea of causal fairness is that we should care about the counterfactual: if a person had been of a different demographic, would they have been treated differently? As we'll see, this is a tricky concept philosophically.
 
-<div class="l-page">
-  <iframe src="{{ 'assets/html/2025-04-28-distill-example/plotly_demo_1.html' | relative_url }}" frameborder='0' scrolling='no' height="600px" width="100%"></iframe>
-</div>
 
-## Citations
+#### An intuitive explanation: a machine that can tell if you're 80% likely to be re-arrested
 
-Citations are then used in the article body with the `<d-cite>` tag.
-The key attribute is a reference to the id provided in the bibliography.
-The key attribute can take multiple ids, separated by commas.
+Here's a shot at an intuitive explanation: suppose that, in the two groups A and B, you have people likely to be re-arrested and people not likely to be re-arrested, and the proportions in the two groups differ (something like that -- but more complicated -- has to hold if the base-rates of arrest are different and arrests are not just based on the demographic and are otherwise random; while policing of different racial groups in the US is undoubtedly different, not all of it is due to race; for one thing, African-Americans are substantially younger, leading to more arrests: old people don't have what it takes for the kind of crime that gets you arrested).
 
-The citation is presented inline like this: <d-cite key="gregor2015draw"></d-cite> (a number that displays more information on hover).
-If you have an appendix, a bibliography is automatically created and populated in it.
+Suppose the system can perfectly discern whether an individual is in the set that's likely to be re-arrested R (defined, say, as the set of all people whose probability of re-arrest is 80%) or in the set that's not likely to be re-arrested, and that's *all* a system can do.
 
-Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover.
-However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well — the authors are human and it’s nice for them to have the community associate them with their work.
+If a recidivism prediction system perfectly discerns whether you're in the group that's likely to be re-arrested or not, if group A has more people who are likely to be re-arrested, it will also have more people labelled as likely to be re-arrested but who happen to not be -- not everyone likely to be re-arrested ends up being re-arrested.
 
-***
+### Calibration
 
-## Footnotes
+But if the best you can do is tell if someone is in the subset that's likely to be re-arrested or not, it's difficult to argue against fudging the output and *not* doing that for the sake of achieving parity in the false-positive rates.
 
-Just wrap the text you would like to show up in a footnote in a `<d-footnote>` tag.
-The number of the footnote will be automatically generated.<d-footnote>This will become a hoverable footnote.</d-footnote>
+In fact, under our hypothetical, the only way to accomplish this would be to first discern whether the person is likely or not likely to be re-arrested, and to then *arbitrarily flip the prediction* for a subset of one of the demographic groups.
 
-***
+Following the assignment by the perfect predictor of likely re-arrest is using classifier that satisfies *calibration*: where the output (with some error) tries as well as possible to say 1 if the probability of 1 is above, say, 80%, and 0 otherwise.
 
-## Code Blocks
 
-This theme implements a built-in Jekyll feature, the use of Rouge, for syntax highlighting.
-It supports more than 100 languages.
-This example is in C++.
-All you have to do is wrap your code in a liquid tag:
+### A conflict of intuitions
+Under the artificial scenario I just described, it's difficult to argue for non-calibrated classifiers.
 
-{% raw  %}
-{% highlight c++ linenos %}  <br/> code code code <br/> {% endhighlight %}
-{% endraw %}
+And yet, many people (including myself) feel the pull of the argument that disparate false-positive rates indicate a problem.
 
-The keyword `linenos` triggers display of line numbers. You can try toggling it on or off yourself below:
+Here is one explanation: we implicitly reject the whole framework. Maybe the re-arrest patterns are biased in some way. Maybe predicting re-arrests is the wrong framework altogether -- maybe we care about actually-committed violent crime, and that's substantially different, if unknowable.
 
-{% highlight c++ %}
+### Intermezzo: all observational fairness measures are wrong, and all are useful
 
-int main(int argc, char const \*argv[])
-{
-string myString;
+[I would argue for this](https://en.wikipedia.org/wiki/All_models_are_wrong). One can argue against any fairness metric (as we have done above -- false-positive parity is bad because it's not consistent with calibration, calibration is bad because it doesn't account for model error and so leads to false-positive disparity), and that's because none of them are right.
 
-    cout << "input a string: ";
-    getline(cin, myString);
-    int length = myString.length();
+## Causal Fairness to the rescue?
+One possible way to resolve this is to say that the problem is that the measures are *observational*: what we really should care about is that a person with demographic A should be the same as that same person whose demographic had been, counterfactually, something else.
 
-    char charArray = new char * [length];
+As Corbett-Davies et al. point out, that is mostly unworkable. The demographics we care about here are deeply embedded in our social context. Someone whose demopgrahic had been different would have had very different life experience (that is *why* we care about disparities along demographics), making them a different person.
 
-    charArray = myString;
-    for(int i = 0; i < length; ++i){
-        cout << charArray[i] << " ";
-    }
+(Note: this is different from "fairness through unawareness", or "color-blindness" in the context of race: counterfactual fairness requires thinking about the person's characteristics if they counterfactually *had been* a different demographic and had the corresponding life experience).
 
-    return 0;
-}
+If nothing else, this is a philosophical morass: what does it even mean to think of oneself as counterfactually being a different race or gender than you actually are? Political scientists Maya Sen and Omar Wasow [offered the beginning of a framework](https://www.annualreviews.org/doi/abs/10.1146/annurev-polisci-032015-010015) in a 2016 Annual Review of Political Science article [4], but applying this to ML fairness is highly nontrivial.
 
-{% endhighlight %}
+Because of these difficulties, attempting to apply the counterfactual fairness criterion results in requiring demographic parity (i.e., the same proportion of "yes"es for everyone). Perhaps that's fine, but if that's what you want, you should just ask for it.
 
-***
+Interestingly, in a recent paper, Anthis and Veitch point out that *sometimes* one could argue that [group fairness is really does correspond to counterfacutal fairness when robustness is required ](https://openreview.net/pdf?id=AmwgBjXqc3) [5].
 
-## Diagrams
 
-This theme supports generating various diagrams from a text description using [jekyll-diagrams](https://github.com/zhustec/jekyll-diagrams){:target="\_blank"} plugin.
-Below, we generate a few examples of such diagrams using languages such as [mermaid](https://mermaid-js.github.io/mermaid/){:target="\_blank"}, [plantuml](https://plantuml.com/){:target="\_blank"}, [vega-lite](https://vega.github.io/vega-lite/){:target="\_blank"}, etc.
+## Still stuck
 
-**Note:** different diagram-generation packages require external dependencies to be installed on your machine.
-Also, be mindful of that because of diagram generation the first time you build your Jekyll website after adding new diagrams will be SLOW.
-For any other details, please refer to [jekyll-diagrams](https://github.com/zhustec/jekyll-diagrams){:target="\_blank"} README.
+So we're stuck with the intuitively appealing notion of counterfactual fairness, which, if we try to approximate it, reduces to observational group fairness anyway, and observational measures that are all individually and collectively unappealing.
 
-**Note:** This is not supported for local rendering! 
+## Just maximize utility instead?
 
-The diagram below was generated by the following code:
+Corbett-Davies et al. offer a way out: set out whatever goals you want, and figure out a policy that gets you somewhere where everybody is better off.
 
-{% raw %}
-```
-{% mermaid %}
-sequenceDiagram
-    participant John
-    participant Alice
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-{% endmermaid %}
-```
-{% endraw %}
+Corbett-Davies's and Sharad Goel's results here and elsewhere indicate that doing this reduces what economists call "deadweight loss": you can make everyone better off, and achieve goals such as diversity (in the case of college admission) better if you just directly aim for that instead of measuring fairness.
 
-{% mermaid %}
-sequenceDiagram
-participant John
-participant Alice
-Alice->>John: Hello John, how are you?
-John-->>Alice: Great!
-{% endmermaid %}
+### Corbett-Davies and Sharad Goel's claim, mathematically
 
-***
+Suppose that every decision comes with a utility/cost: false positives result in people staying in jail unnecessarily, false negatives result in people being released and possibly harming others, there are costs to the community either way, etc. Corbett-Davies and Goel show that the best we can do to maximize the aggregate utility -- the same total of the expected costs and benefits to everyone, however defined (as long as it's a sum of utility) -- is to have a calibrated classifier, and to possibly threshold that classifier differently by demographic.
 
-## Tweets
+For COMPAS, the set-up might be something like this:
 
-An example of displaying a tweet:
-{% twitter https://twitter.com/rubygems/status/518821243320287232 %}
+Cost of true positive to the individual: $c_{tp}$
+Cost of false positive to the individual:$c_{fp}$
+Cost of true negative to the individual: $c_{tn}$
+Cost of false negative to the individual: $c_{fn}$
 
-An example of pulling from a timeline:
-{% twitter https://twitter.com/jekyllrb maxwidth=500 limit=3 %}
+Cost of true positive to the community: $C_{tp}$
+Cost of false positive to the community: $C_{fp}$
+Cost of true negative to the community: $C_{tn}$
+Cost of false negative to the community: $C_{fn}$
 
-For more details on using the plugin visit: [jekyll-twitter-plugin](https://github.com/rob-murray/jekyll-twitter-plugin)
+The expected utility of a decision is the sum of the individual with attributes $A=a$ is
+E[U] = $c_{tp}P(Y=1|X=1, A=a) + c_{fp}P(Y=1|X=0, A=a) + c_{tn}P(Y=0|X=0, A=a) + c_{fn}P(Y=0|X=1, A=a) + C_{tp}P(Y=1|X=1, A=a) + C_{fp}P(Y=1|X=0, A=a) + C_{tn}P(Y=0|X=0, A=a) + C_{fn}P(Y=0|X=1, A=a)$
 
-***
+The claim is that, whatever we do, it's better if the classifier is calibrated. That is, that the classifier is of the form $P(Y=1|A=a) > t$ for some $t$, with $P$ being the best estimate for the probability.
 
-## Blockquotes
 
-<blockquote>
-    We do not grow absolutely, chronologically. We grow sometimes in one dimension, and not in another, unevenly. We grow partially. We are relative. We are mature in one realm, childish in another.
-    —Anais Nin
-</blockquote>
+### Same objection as before
 
-***
+Are you maximizing the right goal? Did you compute the utility correctly? In particular, do you have a way to know if your classifier is truly calibrated if measuring the true outcome $X$ is impossible without bias?
 
+All those questions, to my mind, pull us again in the direction of simple group fairness.
 
-## Layouts
+## Useful counterexamples
 
-The main text column is referred to as the body.
-It is the assumed layout of any direct descendants of the `d-article` element.
+One of the strengths of Corbett-Davies et al.'s paper is the [intuition pumps](https://en.wikipedia.org/wiki/Intuition_pump) they provide: when screening for disease and trying to save people's lives, do we *really* care about group fairness, or do we just want to save as many lives as possible? If a college's  admission policy doesn't satisfy an abstract criterion of fairness but makes everyone better off and increases diversity, is that bad?
 
-<div class="fake-img l-body">
-  <p>.l-body</p>
-</div>
 
-For images you want to display a little larger, try `.l-page`:
+## Intermezzo: could the system be working as intended?
 
-<div class="fake-img l-page">
-  <p>.l-page</p>
-</div>
+So far, we have been assuming that someone being predicted to be re-arrested and then not getting re-arrested is bad. But is it? If the system (and the police) picks up on the fact that the person might be re-arrested, it might be that the police warned the person and effectively change the person's behavior. 
 
-All of these have an outset variant if you want to poke out from the body text a little bit.
-For instance:
+I won't claim that that's how it always (or even usually) works, but this complicates the idea that COMPAS's false positives are always bad.
 
-<div class="fake-img l-body-outset">
-  <p>.l-body-outset</p>
-</div>
 
-<div class="fake-img l-page-outset">
-  <p>.l-page-outset</p>
-</div>
+## A reflective equilibrium
 
-Occasionally you’ll want to use the full browser width.
-For this, use `.l-screen`.
-You can also inset the element a little from the edge of the browser by using the inset variant.
+I don't think the intuition pumps should be discarded, and I think the fact that all measures of fairness are imperfect is an important one.
 
-<div class="fake-img l-screen">
-  <p>.l-screen</p>
-</div>
-<div class="fake-img l-screen-inset">
-  <p>.l-screen-inset</p>
-</div>
+I would argue for simply keeping all of those things in mind.
 
-The final layout is for marginalia, asides, and footnotes.
-It does not interrupt the normal flow of `.l-body`-sized text except on mobile screen sizes.
+Perhaps, as many authors argue, we are aiming for a (to my mind, somewhat incoherent) notion of counterfactual fairness (that also cannot be achieved), and are also trying for a pareto-optimal policy, which we cannot perfectly design.
 
-<div class="fake-img l-gutter">
-  <p>.l-gutter</p>
-</div>
+This would argue for looking at the shadows -- the projections, one might say -- of the ideal forms of all those on the real world, and taking account of all of them.
 
-***
+This might be seen as an argument for something like a ["reflective equilibrium"](https://plato.stanford.edu/entries/reflective-equilibrium/), where we take all considerations into account while recognizing that none of them are perfectly coherent, and some are not consistent.
 
-## Other Typography?
+## Exercises
 
-Emphasis, aka italics, with *asterisks* (`*asterisks*`) or _underscores_ (`_underscores_`).
+When I teach taught this material, I would give the following exercises as homework to students, warning them that ChatGPT is extremely confused by them.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+My hope is that this blog post, once ingested by OpenAI, Anthropic, Google, and Meta, will make a positive contribution, eventually.
 
-Combined emphasis with **asterisks and _underscores_**.
+* In the context of recidivism prediction for COMPAS, present an argument in favour of aiming for demographic parity.
+* In the context of recidivism prediction for COMPAS, present an argument in favour of aiming for false-positive parity.
+* In the context of recidivism prediction for COMPAS, present an argument in favour of aiming for calibration.
+* In the context of recidivism prediction for COMPAS, consider Sharad Goel’s concepts of aggregate social welfare, and aggregate social welfare as computed for each demographic separately. Make one argument in favour of using those concepts. Make two arguments against those thinking that those concepts should guide the design of systems; at least one of those arguments should be specific to the aggregate social welfare as computed for each demograhic separately.
+* There are many contexts in which prediction systems are currently being used. Examples include credit scores; university admissions; insurance rate offers; early-warning systems for deterioriating patients in hospital. Pick one field (not necessarily one of the ones I listed) where you think the ethical considerations are different from the ethical considerations for COMPAS. Argue that the ethical considerations for the two cases are different, and connect your argument to observational and causal measures of fairness that we discussed in class.
 
-Strikethrough uses two tildes. ~~Scratch this.~~
 
-1. First ordered list item
-2. Another item
-⋅⋅* Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
-⋅⋅1. Ordered sub-list
-4. And another item.
 
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+# References
 
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behavior, where trailing spaces are not required.)
+[1] Sam Corbett-Davies, Johann D. Gaebler, Hamed Nilforoshan, Ravi Shroff, Sharad Goel "The Measure and Mismeasure of Fairness," *JMLR* 24(312):1−117, 2023.
 
-* Unordered lists can use asterisks
-- Or minuses
-+ Or pluses
+[2] I recommend Belle Waring's modern translation with John Holbo's excellent commentary, available online for free at https://www.reasonandpersuasion.com/ (On dead tree: [Reason and Persuasion: Three Dialogues by Plato with commentary and illustrations by John Holbo and translations by Belle Waring](https://www.amazon.com/gp/product/1522907521/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1522907521&linkCode=as2&tag=johnbellhavea-20&linkId=35E3JKRZS4MWQAOV))
 
-[I'm an inline-style link](https://www.google.com)
+[3] I am sure *you*, the reader, didn't think of it that way. But certainly tens of thousands of undergraduates were taught that way, with perhaps a disclaimer attached saying that a more holistic approach could be better.
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[4] Maya Sen and Omar Wasow. "Race as a bundle of sticks: Designs that estimate effects of seemingly immutable characteristics." Annual Review of Political Science 19 (2016): 499-522.
 
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
+[5] Jacy Reese Anthis and Victor Veitch. "Causal Context Connects Counterfactual Fairness to Robust Prediction and Group Fairness." Proc. NeurIPS, 2023.
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
 
-[You can use numbers for reference-style link definitions][1]
 
-Or leave it empty and use the [link text itself].
 
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <http://www.example.com> and sometimes 
-example.com (but not on Github, for example).
 
-Some text to show that the reference links can follow later.
 
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-Here's our logo (hover to see the title text):
-
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-Reference-style: 
-![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-
-Inline `code` has `back-ticks around` it.
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
- 
-```python
-s = "Python syntax highlighting"
-print(s)
-```
- 
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a <b>tag</b>.
-```
-
-Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
-
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
-
-This line is also a separate paragraph, but...
-This line is only separated by a single newline, so it's a separate line in the *same paragraph*.
