@@ -201,7 +201,10 @@ Cost of true negative to the community: $C_{tn}$
 Cost of false negative to the community: $C_{fn}$
 
 The expected utility of a decision is the sum of the individual with attributes $A=a$ is
-E[U] = $c_{tp}P(Y=1|X=1, A=a) + c_{fp}P(Y=1|X=0, A=a) + c_{tn}P(Y=0|X=0, A=a) + c_{fn}P(Y=0|X=1, A=a) + C_{tp}P(Y=1|X=1, A=a) + C_{fp}P(Y=1|X=0, A=a) + C_{tn}P(Y=0|X=0, A=a) + C_{fn}P(Y=0|X=1, A=a)$
+
+$E[U] = -[c_{tp}P(Y=1|X=1, A=a) + c_{fp}P(Y=1|X=0, A=a) + c_{tn}P(Y=0|X=0, A=a) + c_{fn}P(Y=0|X=1, A=a) + C_{tp}P(Y=1|X=1, A=a) + C_{fp}P(Y=1|X=0, A=a) + C_{tn}P(Y=0|X=0, A=a) + C_{fn}P(Y=0|X=1, A=a)]$
+
+(Utility is the negative cost -- I think talking in terms of costs is more intuitive).
 
 The claim is that, whatever we do, it's better if the classifier is calibrated. That is, that the classifier is of the form $P(Y=1|A=a) > t$ for some $t$, with $P$ being the best estimate for the probability.
 
