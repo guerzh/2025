@@ -1,7 +1,7 @@
 ---
 layout: distill
 title: The Philosophical and Statistical Underpinnings of ML Fairness
-description: In Plato's celebrated *Meno* [2], after the title character Meno asks Socrates whether virtue can be taught, he is taken on a whirlwind tour of the intellectual concepts, only to be brought by Socrates to the conclusion that virtue is (1) a gift from the gods (2) a concept that neither Meno nor Socrates really understand. Having armed myself with a generous helping of hubris and Corbett-Davies et al.'s excellent *JMLR* article "The Measure and Mismeasure of Fairness" [1], I would like to take you on a similar tour. I'll depart from the usual mid-2010s story -- the difficulty with understanding fairness in ML cannot be reduced to figuring out what your principles are and then mapping those  [3]. I'll also depart from the story by Corbett-Davies et al. -- it's not all about designing policies maximizing utility, however broadly utility is defined. Instead, I'll argue for a sort of reflective equilibrium: **ethical reasoning about any particular case needs to consider counterarguments, and, in particular, any principle that's articulated should be tested against challenging counterexamples -- a little Socrates whispering in your ear.**
+description: In Plato's celebrated Meno [2], after the title character Meno asks Socrates whether virtue can be taught, he is taken on a whirlwind tour of the intellectual concepts, only to be brought by Socrates to the conclusion that virtue is (1) a gift from the gods (2) a concept that neither Meno nor Socrates really understand. Having armed myself with a generous helping of hubris and Corbett-Davies et al.'s excellent JMLR article "The Measure and Mismeasure of Fairness" [1], I would like to take you on a similar tour. I'll depart from the usual mid-2010s story -- the difficulty with understanding fairness in ML cannot be reduced to figuring out what your principles are and then mapping those  [3]. I'll also depart from the story by Corbett-Davies et al. -- it's not all about designing policies maximizing utility, however broadly utility is defined. Instead, I'll argue for a sort of reflective equilibrium: ethical reasoning about any particular case needs to consider counterarguments, and, in particular, any principle that's articulated should be tested against challenging counterexamples -- a little Socrates whispering in your ear.
 date: 2025-04-28
 future: true
 htmlwidgets: true
@@ -56,6 +56,11 @@ _styles: >
     font-size: 16px;
   }
 ---
+
+
+
+In Plato's celebrated *Meno* [2], after the title character Meno asks Socrates whether virtue can be taught, he is taken on a whirlwind tour of the intellectual concepts, only to be brought by Socrates to the conclusion that virtue is (1) a gift from the gods (2) a concept that neither Meno nor Socrates really understand. Having armed myself with a generous helping of hubris and Corbett-Davies et al.'s excellent *JMLR* article "The Measure and Mismeasure of Fairness" [1], I would like to take you on a similar tour. I'll depart from the usual mid-2010s story -- the difficulty with understanding fairness in ML cannot be reduced to figuring out what your principles are and then mapping those  [3]. I'll also depart from the story by Corbett-Davies et al. -- it's not all about designing policies maximizing utility, however broadly utility is defined. Instead, I'll argue for a sort of reflective equilibrium: **ethical reasoning about any particular case needs to consider counterarguments, and, in particular, any principle that's articulated should be tested against challenging counterexamples -- a little Socrates whispering in your ear.**
+
 
 # Getting to the bottom of the philosophical underpinning of ML Fairness literature
 
