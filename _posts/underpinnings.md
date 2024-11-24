@@ -24,18 +24,6 @@ authors:
 #   - make sure that TOC names match the actual section names
 #     for hyperlinks within the post to work correctly. 
 #   - please use this format rather than manually creating a markdown table of contents.
-toc:
-  - name: Equations
-  - name: Images and Figures
-    subsections:
-    - name: Interactive Figures
-  - name: Citations
-  - name: Footnotes
-  - name: Code Blocks
-  - name: Diagrams
-  - name: Tweets
-  - name: Layouts
-  - name: Other Typography?
 
 ---
 
