@@ -6,6 +6,7 @@ date: 2025-04-28
 future: true
 htmlwidgets: true
 hidden: false
+---
 
 # Anonymize when submitting
 # authors:
@@ -36,26 +37,6 @@ toc:
   - name: Tweets
   - name: Layouts
   - name: Other Typography?
-
-# Below is an example of injecting additional post-specific styles.
-# This is used in the 'Layouts' section of this post.
-# If you use this post as a template, delete this _styles block.
-_styles: >
-  .fake-img {
-    background: #bbb;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 12px;
-  }
-  .fake-img p {
-    font-family: monospace;
-    color: white;
-    text-align: left;
-    margin: 12px 0;
-    text-align: center;
-    font-size: 16px;
-  }
----
 
 
 
@@ -119,11 +100,11 @@ Suppose we have a sensitive demographic $D$ and an outcome of interest of $X$ (i
 
 - **Demographic parity**: $P(Y=1|D=1) = P(Y=1|D=0)$. That is, the same percentage of people gets re-arrested in different demographics. This is susceuptible to the objection that it might be that the *correct* predictions of re-arrest are different in different demographics. That might be because of systemic bias, but it could also be because of a benign lurking variable. For example, the fact that African-American defendants in the COMPAS dataset are younger statistically explains some of the disparity in re-arrest rates.
 
-**False-positive parity**: $P(Y=1|D=1, X=0) = P(Y=1|D=0, X=0)$. That is, the same percentage of people who are not re-arrested are predicted to be re-arrested in different demographics. The appeal is obvious: if you won't be re-arrested, the system shouldn't predict you will, and if the system is wrong, it should be wrong in the same way for everyone.
+- **False-positive parity**: $P(Y=1|D=1, X=0) = P(Y=1|D=0, X=0)$. That is, the same percentage of people who are not re-arrested are predicted to be re-arrested in different demographics. The appeal is obvious: if you won't be re-arrested, the system shouldn't predict you will, and if the system is wrong, it should be wrong in the same way for everyone.
 
-**False-negative parity**: $P(Y=1|D=1, X=1) = P(Y=1|D=0, X=1)$. That is, the same percentage of people who are re-arrested are predicted to be re-arrested in different demographics. The argument is similar to the false-positive parity argument.
+- **False-negative parity**: $P(Y=1|D=1, X=1) = P(Y=1|D=0, X=1)$. That is, the same percentage of people who are re-arrested are predicted to be re-arrested in different demographics. The argument is similar to the false-positive parity argument.
 
-**Calibration**: $P(X=1|Y=1, D=1) = P(X=1|Y=1, D=0)$. That is, if the system predicts re-arrest, the probability of re-arrest is the same in different demographics. If the system predicts a probability of re-arrest, a calibrated system will have that probability be correct. The argument for calibration is straightforward: we just want the system to be as right as possible. The argument against it must involve saying that we want to bias the system away from being right about $X$, because $X$ itself is flawed, or that biasing the system make the system more just in another way.
+- **Calibration**: $P(X=1|Y=1, D=1) = P(X=1|Y=1, D=0)$. That is, if the system predicts re-arrest, the probability of re-arrest is the same in different demographics. If the system predicts a probability of re-arrest, a calibrated system will have that probability be correct. The argument for calibration is straightforward: we just want the system to be as right as possible. The argument against it must involve saying that we want to bias the system away from being right about $X$, because $X$ itself is flawed, or that biasing the system make the system more just in another way.
 
 As was quickly pointed out, if the base rates are different, in general, only one measure of fairness can possibly hold at a time.
 
